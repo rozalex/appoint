@@ -23,7 +23,7 @@ export default class CreateAppointment extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
+    axios.get('https://app-point.herokuapp.com/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -74,7 +74,7 @@ export default class CreateAppointment extends Component {
 
     console.log(appointment);
 
-    axios.post('http://localhost:5000/appointments/add', appointment)
+    axios.post('https://app-point.herokuapp.com/appointments/add', appointment)
       .then(res => console.log(res.data));
 
     window.location = '/';

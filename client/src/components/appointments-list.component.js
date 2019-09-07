@@ -21,7 +21,7 @@ export default class AppointmentsList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/appointments/')
+    axios.get('https://app-point.herokuapp.com/appointments/')
       .then(response => {
         this.setState({ appointments: response.data })
       })
@@ -31,7 +31,7 @@ export default class AppointmentsList extends Component {
   }
 
   deleteExercise = (id) => {
-    axios.delete('http://localhost:5000/exercises/'+id)
+    axios.delete('https://app-point.herokuapp.com/users/appointments/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
