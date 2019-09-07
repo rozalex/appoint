@@ -7,7 +7,7 @@
     "node": "10.x"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server",
     "test": "node test.js"
   },
   "dependencies": {
