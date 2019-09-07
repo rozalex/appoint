@@ -9,7 +9,6 @@
   "scripts": {
     "start": "node server",
     "all-install": "npm install && cd client && npm install",
-    "build": "cd client && npm run build",
     "test": "node test.js"
   },
   "dependencies": {
