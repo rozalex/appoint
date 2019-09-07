@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          22sss22 To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+import Navbar from "./components/navbar.component"
+import AppointmentList from "./components/appointments-list.component";
+import EditAppointment from "./components/edit-appointment.component";
+import CreateAppointment from "./components/create-appointment.component";
+import CreateUser from "./components/create-user.component";
+
+function App() {
+  return (
+    <Router>
+        <div className="container">
+        <Navbar />
+        <br/>
+        <Route path="/" exact component={AppointmentList} />
+        <Route path="/edit/:id" component={EditAppointment} />
+        <Route path="/create" component={CreateAppointment} />
+        <Route path="/user" component={CreateUser} />
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;
