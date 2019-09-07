@@ -7,10 +7,8 @@
     "node": "10.x"
   },
   "scripts": {
-    "all-install": "npm install && cd client && npm install",
-    "build": "cd client && npm run build",
-    "start": "node server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node test.js"
   },
   "dependencies": {
     "ejs": "^2.5.6",
