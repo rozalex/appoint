@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+import * as constants from '../consts/env';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class CreateAppointment extends Component {
+export default class EditAppointment extends Component {
   constructor(props) {
     super(props);
 
@@ -23,12 +24,24 @@ export default class CreateAppointment extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://app-point.herokuapp.com/users/')
+    axios.get(`${constants.DB_URL}/appointments/${this.props.match.params.id}`)
+      .then(response => {
+        this.setState({
+          username: response.data.username,
+          description: response.data.description,
+          duration: response.data.duration,
+          date: new Date(response.data.date)
+        })   
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+
+    axios.get(`${constants.DB_URL}//users/`)
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
             users: response.data.map(user => user.username),
-            username: response.data[0].username
           })
         }
       })
@@ -66,6 +79,7 @@ export default class CreateAppointment extends Component {
     e.preventDefault();
 
     const appointment = {
+      provider: "alex",
       username: this.state.username,
       description: this.state.description,
       duration: this.state.duration,
@@ -74,7 +88,7 @@ export default class CreateAppointment extends Component {
 
     console.log(appointment);
 
-    axios.post('https://app-point.herokuapp.com/appointments/add', appointment)
+    axios.post(`${constants.DB_URL}/appointments/update/${this.props.match.params.id}`, appointment)
       .then(res => console.log(res.data));
 
     window.location = '/';
@@ -83,7 +97,7 @@ export default class CreateAppointment extends Component {
   render() {
     return (
     <div>
-      <h3>Create New Appointment</h3>
+      <h3>Edit Appointment</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Username: </label>
@@ -131,7 +145,7 @@ export default class CreateAppointment extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create Appointment" className="btn btn-primary" />
+          <input type="submit" value="Edit Appointment" className="btn btn-primary" />
         </div>
       </form>
     </div>

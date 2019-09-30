@@ -1,23 +1,35 @@
-import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import Navbar from "./components/navbar.component"
-import AppointmentList from "./components/appointments-list.component";
-import EditAppointment from "./components/edit-appointment.component";
-import CreateAppointment from "./components/create-appointment.component";
-import CreateUser from "./components/create-user.component";
+import {
+  Navbar, 
+  AppointmentsList, 
+  EditAppointment, 
+  CreateAppointment, 
+  CreateUser
+} from "./components"
 
-function App() {
+
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <Router>
         <div className="container">
-        <Navbar />
+        <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <br/>
-        <Route path="/" exact component={AppointmentList} />
-        <Route path="/edit/:id" component={EditAppointment} />
-        <Route path="/create" component={CreateAppointment} />
-        <Route path="/user" component={CreateUser} />
+        {
+           loggedIn &&
+           <div>
+            <Route path="/" exact component={AppointmentsList} />
+            <Route path="/edit/:id" component={EditAppointment} />
+            <Route path="/create" component={CreateAppointment} />
+            <Route path="/user" component={CreateUser} />
+          </div>
+        }
+
       </div>
     </Router>
   );

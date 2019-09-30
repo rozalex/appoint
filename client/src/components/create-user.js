@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import * as constants from '../consts/env';
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -26,9 +27,7 @@ export default class CreateUser extends Component {
       username: this.state.username
     }
 
-    console.log(user);
-
-    axios.post('https://app-point.herokuapp.com/users/add', user)
+    axios.post(`${constants.DB_URL}/users/add`, user)
       .then(res => console.log(res.data));
 
     this.setState({

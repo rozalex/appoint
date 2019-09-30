@@ -2,25 +2,28 @@ const router = require('express').Router();
 let Appointment = require('../models/appointment.model');
 
 router.route('/').get((req, res) => {
-  Appointment.find()
+  // User.find({$or:[{region: "NA"},{sector:"Some Sector"}]}, function(err, user) 
+  Appointment.find({$or:[{provider: req.query.provider}, {username:req.query.provider }]})
     .then(appointments => res.json(appointments))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-  const username = req.body.username;
-  const description = req.body.description;
-  const duration = Number(req.body.duration);
-  const date = Date.parse(req.body.date);
+const provider = req.body.provider;
+const username = req.body.username;
+const description = req.body.description;
+const duration = Number(req.body.duration);
+const date = Date.parse(req.body.date);
 
-  const newAppointment = new Appointment({
-    username,
-    description,
-    duration,
-    date,
-  });
+const newAppointment = new Appointment({
+  provider,
+  username,
+  description,
+  duration,
+  date,
+});
 
-  newAppointment.save()
+newAppointment.save()
   .then(() => res.json('appointment added!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
