@@ -24,7 +24,13 @@ export default class CreateUser extends Component {
     e.preventDefault();
 
     const user = {
-      username: this.state.username
+      username: this.state.username,
+      email: 'a@a.com',
+      password: '12345',
+      firstname: "aaaa",
+      lastname: "123123",
+      phone: "12312312",
+      type: "0"
     }
 
     axios.post(`${constants.DB_URL}/users/add`, user)

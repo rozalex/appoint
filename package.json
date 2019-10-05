@@ -13,7 +13,7 @@
     "server": "nodemon index.js",
     "server-debug": "node --inspect index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm start\" \"npm run client\"",
     "dev-debug": "concurrently \"npm run server-debug\" \"npm run client\"",
     "test": "node test.js"
   },
